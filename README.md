@@ -13,8 +13,8 @@ $ npm install react-huc -S
 import Huc from 'react-huc'
 
 <Huc initStore={{isShow: false}}>
- <Child1 />
- <Child2 />
+  <Child1 />
+  <Child2 />
 </Huc>
 
 //Child1
@@ -26,7 +26,6 @@ render() {
 }
 
 //Chil2
-
 render(){
   const {isShow, dispatch} = this.props
   return (
@@ -35,4 +34,20 @@ render(){
     </div>
   )
 }
+```
+
+```js
+import Huc from 'react-huc'
+
+handleToggle = () => {
+  const parent = this.refs.parent
+  parent.dispatch({isShow: !parent.state.isShow})
+}
+
+<button onClick={()=> this.handleToggle()}></button>
+
+<Huc initSrote={{isSHow: false}} ref="parent">
+  <Child1 />
+  <Child2 />
+</Huc>
 ```
