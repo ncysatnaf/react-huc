@@ -74,7 +74,7 @@ const withReducer = (state, action) => {
 //Change huc state from child
 //Child1
 render() {
-  const {dispatch} = this.props
+  const {isShow, dispatch} = this.props
   return (
     <div onClick={()=> dispatch({type: 'TOGGLE_MODAL'})}>{isShow}</div>
   )
@@ -100,7 +100,7 @@ handleToggle = () => {
 //change state from other component
 <button onClick={()=> this.handleToggle()}></button>
 
-<Huc initSrote={{isSHow: false}} withReducer={withReducer} ref="parent">
+<Huc initStore={{isSHow: false}} withReducer={withReducer} ref="parent">
   <Child1 />
 </Huc>
 ```
