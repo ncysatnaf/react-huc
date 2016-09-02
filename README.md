@@ -9,7 +9,7 @@ $ npm install react-huc -S
 
 ## usage
 
-Base usage
+### Huc
 ```js
 import Huc from 'react-huc'
 
@@ -47,7 +47,7 @@ handleToggle = () => {
 //change state from other component
 <button onClick={()=> this.handleToggle()}></button>
 
-<Huc initSrote={{isSHow: false}} ref="parent">
+<Huc initStore={{isSHow: false}} ref="parent">
   <Child1 />
   <Child2 />
 </Huc>
@@ -103,4 +103,57 @@ handleToggle = () => {
 <Huc initStore={{isSHow: false}} withReducer={withReducer} ref="parent">
   <Child1 />
 </Huc>
+```
+
+### Provider
+```js
+//app.js
+improt React, {Component, PropTypes} from 'react'
+
+setStateWithRef = (ref, data) => {
+  this.refs[ref].setState(data)
+}
+
+<Provider context={{app: this}}>
+<Child />
+<Count ref="count" initState={{count: 0}}/>
+</Provider>
+
+//children component
+class Child extends Component {
+  static contextTypes = {
+    app: PropTypes.object.isRequired
+  }
+  constructor(props){
+    super(props)
+  }
+  handleAdd = () => {
+    const {app, app:{refs:{navigation}}} = this.context
+    app.setStateWithRef('navigation', {count: count.state.count + 1})
+  }
+
+  render(){
+    return (
+      <div onClick={()=> this.handleAdd()}> + </div>
+    )
+  }
+}
+
+class Count extends Component {
+  constructor(props){
+    super(props)
+  }
+  componentWillMount = () => {
+    if(this.props.initState){
+      this.state = initState
+    }
+  }
+
+  render(){
+    return (
+      <div>{this.props.count}</div>
+    )
+  }
+}
+
 ```
