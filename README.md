@@ -11,7 +11,7 @@ $ npm install react-huc -S
 
 ### Huc
 ```js
-import Huc from 'react-huc'
+import Huc} from 'react-huc'
 
 <Huc initStore={{isShow: false}}>
   <Child1 />
@@ -38,7 +38,7 @@ render(){
 ```
 
 ```js
-import Huc from 'react-huc'
+import { Huc } from 'react-huc'
 
 handleToggle = () => {
   const parent = this.refs.parent
@@ -109,15 +109,25 @@ handleToggle = () => {
 ```js
 //app.js
 improt React, {Component, PropTypes} from 'react'
+import {Provider} from 'react-hoc'
 
-setStateWithRef = (ref, data) => {
-  this.refs[ref].setState(data)
+
+class App extends Component {
+
+  setStateWithRef = (ref, data) => {
+    this.refs[ref].setState(data)
+  }
+
+  render(){
+    return (
+      <Provider context={{app: this}}>
+      <Child />
+      <Count ref="count" initState={{count: 0}}/>
+      </Provider>
+    )
+  }
 }
 
-<Provider context={{app: this}}>
-<Child />
-<Count ref="count" initState={{count: 0}}/>
-</Provider>
 
 //children component
 class Child extends Component {
